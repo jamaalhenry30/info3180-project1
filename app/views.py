@@ -5,8 +5,12 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file creates your application.
 """
 
+from distutils.log import debug
 from app import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
+from .models import UserProperty
+from .forms import PropertyForm
+from . import db
 
 
 ###
@@ -24,10 +28,39 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties/create', methods = ['GET','POST'])
+def create():
+    form = PropertyForm()
+    if request.method=="GET":
+       
+        return render_template('property.html',form=form)
+    if request.method=="POST":
+       
+        title = form.title.data
+        description = form.description.data
+        numroom = form.numroom.data
+        numbath = form.numbath.data
+        price = form.price.data
+        property_type = form.property_type.data
+        location = form.location.data
 
+    
+        photo = form.photo.data
+        #filename = secure.filename(photo.filename)
+        #file.
+        
+        propertyfile = UserProperty(title=title,description=description,numroom=numroom,numbath=numbath,price=price,property_type=property_type,location=location,photo=photo)
+        db.session.add(propertyfile)
+        db.session.commit()
+        flash('file uploaded to database!')
+        return redirect(url_for('home'))  
+    flash_errors(form)
+    return render_template('property.html',form=form)
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+
+
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):

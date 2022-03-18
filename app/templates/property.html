@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block main%}
+<h1>Add New Property</h1>
+<div class="form group">
+    <form action = "{{url_for('create')}}" method = "post">
+    {{form.csrf_token}}
+        <div id="title">
+            {{form.title.label}}
+            {{form.title(placeholder="Please enter your full name")}}
+        </div>
+        <div id="description">
+            {{form.description.label}}
+            {{form.description}}
+        </div>
+        <div class="nums">
+            <div id="rooms">
+                {{form.numroom.label}}
+                {{form.numroom}}
+            </div>
+            <div class="baths">
+                {{form.numbath.label}}
+                {{form.numbath}}
+            </div>
+        </div>
+        <div class="double">
+            <div id="price">
+                {{form.price.label}}
+                {{form.price}}
+            </div>
+            <div class="type">
+                {{form.property_type.label}}
+                {{form.property_type}}
+            </div>
+        </div>
+        <div id="location">
+            {{form.location.label}}
+            {{form.location}}
+        </div>
+        <div id="photo">
+            {{form.photo.label}}
+            {{form.photo}}
+        </div>
+        <button class="butt" type="submit">Add Property</button>
+        <!-- <div class="butt">  
+        #    {{form.submit}}
+        #</div> -->
+    </form>
+
+</div>
+
+
+
+
+
+{% endblock %}

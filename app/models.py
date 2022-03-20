@@ -4,7 +4,7 @@ from turtle import tiltangle
 from . import db
 
 class UserProperty(db.Model):
-    __tablename__ = 'propertylistings'
+    __tablename__ = 'propertylist'
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(100),nullable = False)
@@ -14,10 +14,10 @@ class UserProperty(db.Model):
     price = db.Column(db.Float,nullable = False)
     property_type = db.Column(db.String(20),nullable = False)
     location = db.Column(db.Text(),nullable = False)
-    photo = db.Column(db.String(255),nullable = False)
+    filename = db.Column(db.String(255))
 
 
-    def __init__(self,title,description,numroom,numbath,price,property_type,location,photo):
+    def __init__(self,title,description,numroom,numbath,price,property_type,location,filename):
         self.title = title
         self.description = description
         self.numroom = numroom
@@ -25,7 +25,7 @@ class UserProperty(db.Model):
         self.price = price
         self.property_type = property_type
         self.location = location
-        self.photo= photo
+        self.filename= filename
 
 
    

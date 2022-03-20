@@ -1,3 +1,113 @@
 body {
     padding-top: 5rem;
+    
 }
+
+.card_image{
+    height: 300px;
+    width: 300px;
+}
+
+.text{
+    padding-left: 20px;
+    width: 500px;
+  
+}
+.nums{
+    display: flex;
+    
+}
+#rightnum{
+    margin-left: 20px;
+}
+.full{
+    display: flex;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-style: groove;
+    
+}
+.form_group{
+    
+    justify-items: space-evenly;
+
+}
+
+
+.formgrouper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.carder{
+    float: left;
+    margin-bottom: 30px;
+    overflow: hidden;
+    max-width: 300px;
+    
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.card_title{
+    width: 300px;
+}
+
+.lol{
+    margin-bottom: 20px;
+}
+.linkbg{
+    background-color: #0D6EFD;
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+ 
+    
+}
+.link{
+    text-decoration: none;
+    color: white;
+
+}
+
+.nums{
+    display: flex;
+    
+}
+
+.double{
+    display: flex;
+   
+}
+.input{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+
+}
+
+.butt{
+    margin-top: 20px;
+    margin-left: 5px;
+    background-color: #0D6EFD;
+    color: white;
+    border-radius: 5px;
+}
+input{
+    width: 80%;
+   
+}
+textarea {
+    width: 80%;}
+
+select{
+    width: 70%;
+}
+

@@ -7,10 +7,12 @@ This file creates your application.
 
 from distutils.log import debug
 from app import app
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, send_from_directory, url_for, flash
 from .models import UserProperty
 from .forms import PropertyForm
 from . import db
+from werkzeug.utils import secure_filename
+import os
 
 
 ###
@@ -34,8 +36,7 @@ def create():
     if request.method=="GET":
        
         return render_template('property.html',form=form)
-    if request.method=="POST":
-       
+    if request.method=="POST" and form.validate_on_submit():
         title = form.title.data
         description = form.description.data
         numroom = form.numroom.data
@@ -43,24 +44,54 @@ def create():
         price = form.price.data
         property_type = form.property_type.data
         location = form.location.data
-
-    
         photo = form.photo.data
-        #filename = secure.filename(photo.filename)
+
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+
+
         #file.
         
-        propertyfile = UserProperty(title=title,description=description,numroom=numroom,numbath=numbath,price=price,property_type=property_type,location=location,photo=photo)
+        propertyfile = UserProperty(title=title,description=description,numroom=numroom,numbath=numbath,price=price,property_type=property_type,location=location,filename=filename)
         db.session.add(propertyfile)
         db.session.commit()
-        flash('file uploaded to database!')
-        return redirect(url_for('home'))  
-    flash_errors(form)
+        flash('Property successfully uploaded!','success')
+        return redirect(url_for('listprops'))  
     return render_template('property.html',form=form)
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 
 
+
+@app.route('/properties')
+def listprops():
+    filename = get_uploaded_images()
+    rootdir = "uploads/"
+    return render_template('properties.html',filename=filename, propertydata = get_all_info(), rootdir=rootdir)
+
+def get_all_info():
+    propertydata = UserProperty.query.all()
+    return propertydata
+
+@app.route('/properties/<int:id>')
+def propertyid(id):
+    rootdir = "uploads/"
+    propid = UserProperty.query.get(id)
+    return render_template('propertyid.html', propid = propid, rootdir = rootdir)
+
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    lst = []
+    for subdir, dirs, files in os.walk("app/static/uploads"):
+        for file in files:
+            lst.append(os.path.join(subdir,file))
+    return lst
+
+@app.route('/properties/create/<filename>')
+def get_image(filename):
+    rootdir = os.getcwd()
+    return send_from_directory(os.path.join(os.getcwd(),app.config['UPLOAD_FOLDER']),filename)
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):

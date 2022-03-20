@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main%}
+
+
+<div class="form_group">
+    
+    <div class="full">
+        <div class = 'photo'>
+        {% set photo = rootdir ~ propid.filename %}
+        <img class="card_image" src = "{{url_for('static',filename = photo)}}" alt = "photo">
+        </div>
+        <div class = 'text'>
+            <h3 class="">{{propid.title}}</h3>
+            <p>{{ propid.description}}</p>
+            <div class="nums">
+                <p>Number of Bathrooms: {{propid.numbath}}</p>
+                <p id = "rightnum">Number of bedrooms: {{propid.numroom}}</p>
+            </div>
+            <p>Location: {{propid.location}}</p>
+            <p>Price: {{'$'~propid.price}}</p>
+            <p>Type: {{propid.property_type}}</p>
+            <button class="lol" type="submit">Email Realtor</button>
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
+

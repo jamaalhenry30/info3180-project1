@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired,InputRequired
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 class PropertyForm(FlaskForm):
-    id_field = HiddenField()
+   
     title = StringField('Property Title', validators=[InputRequired()])
     description = TextAreaField('Description', validators=[InputRequired()])
     numroom = IntegerField('No. of Rooms', validators=[InputRequired()])

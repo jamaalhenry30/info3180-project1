@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main%}
+{% include 'flash_messages.html' %}
+<h1>Properties</h1>
+<div class="formgrouper">
+    {% for data in propertydata %}
+    <div class="carder">
+        {% set pic = rootdir ~ data.filename %}
+        <img class="card_image" src = "{{url_for('static',filename = pic)}}" alt = "photo">
+        <h3 class="card_title">{{data.title}}</h3>
+        <p>Located: {{data.location}}</p>
+        <p>Price: {{data.price}}</p>
+        <div class='linkbg'>
+            <a class = "link" href="{{url_for('propertyid', id=data.id)}}">View Property</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
+

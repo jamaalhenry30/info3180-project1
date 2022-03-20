@@ -3,41 +3,41 @@
 {% block main%}
 <h1>Add New Property</h1>
 <div class="form group">
-    <form action = "{{url_for('create')}}" method = "post">
-    {{form.csrf_token}}
-        <div id="title">
+    <form action = "{{url_for('create')}}" method = "post" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+        <div class="input" id="input1">
             {{form.title.label}}
             {{form.title(placeholder="Please enter your full name")}}
         </div>
-        <div id="description">
+        <div class="input" id="input2">
             {{form.description.label}}
             {{form.description}}
         </div>
         <div class="nums">
-            <div id="rooms">
+            <div class="input" id="input3">
                 {{form.numroom.label}}
-                {{form.numroom}}
+                {{form.numroom(placeholder="3")}}
             </div>
-            <div class="baths">
+            <div class="input" id="input4">
                 {{form.numbath.label}}
-                {{form.numbath}}
+                {{form.numbath(placeholder="5")}}
             </div>
         </div>
         <div class="double">
-            <div id="price">
+            <div class="input" id="input5">
                 {{form.price.label}}
-                {{form.price}}
+                {{form.price(placeholder="15000000")}}
             </div>
-            <div class="type">
+            <div class="input" id="input6">
                 {{form.property_type.label}}
                 {{form.property_type}}
             </div>
         </div>
-        <div id="location">
+        <div class="input" id="input7">
             {{form.location.label}}
-            {{form.location}}
+            {{form.location(placeholder="10 Waterloo Road, Hanover")}}
         </div>
-        <div id="photo">
+        <div class="input" id="input8">
             {{form.photo.label}}
             {{form.photo}}
         </div>
